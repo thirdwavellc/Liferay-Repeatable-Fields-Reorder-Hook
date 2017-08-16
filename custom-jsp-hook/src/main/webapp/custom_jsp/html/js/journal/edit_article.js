@@ -1,5 +1,5 @@
 var fieldWrapperSelector = '.control-group.field-wrapper';
-var fieldsDisplaySelector = '#_15__fieldsDisplay';
+var fieldsDisplaySelector = '#_15_ihgq_null_null_fieldsDisplay';
 
 initSort();
 
