@@ -1,9 +1,14 @@
 <?xml version="1.0"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>com.thirdwavellc</groupId>
+        <artifactId>thirdwave-parent</artifactId>
+        <version>1.1.8</version>
+    </parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.monator</groupId>
-	<artifactId>custom-jsp-hook</artifactId>
+	<artifactId>liferay-repeatable-fields-reorder-hook</artifactId>
 	<packaging>war</packaging>
 	<name>custom-jsp-hook Hook</name>
 	<version>1.0-SNAPSHOT</version>
@@ -79,7 +84,7 @@
 		</dependency>
 	</dependencies>
 	<properties>
-		<liferay.version>6.2.10.9</liferay.version>
-		<liferay.maven.plugin.version>6.2.10.4</liferay.maven.plugin.version>
-	</properties>
+        <liferay.version>6.2.5</liferay.version>
+        <liferay.maven.plugin.version>6.2.5</liferay.maven.plugin.version>
+    </properties>
 </project>
