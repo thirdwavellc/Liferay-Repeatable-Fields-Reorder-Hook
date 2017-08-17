@@ -10,7 +10,7 @@
 	<groupId>com.monator</groupId>
 	<artifactId>liferay-repeatable-fields-reorder-hook</artifactId>
 	<packaging>war</packaging>
-	<name>custom-jsp-hook Hook</name>
+	<name>Emil Oberg - Liferay Repeatable Fields Reorder Hook</name>
 	<version>1.0-SNAPSHOT</version>
 	<build>
 		<finalName>${project.artifactId}</finalName>
