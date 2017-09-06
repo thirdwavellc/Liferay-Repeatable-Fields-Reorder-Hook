@@ -23,6 +23,18 @@ function initSort() {
 
 	});
 	updateArrowsAndButtons();
+	addNumbertoItems();
+}
+
+function addNumbertoItems(){
+	
+
+	var hx = $("head"); //document.getElementsByTagName('head').item(0);
+	var sx = document.createElement("style");
+	sx.type = "text/css"; 
+	sx.appendChild(document.createTextNode('.journal-article-container{counter-reset: section;}  .control-group.field-wrapper > span.control-label:after{counter-increment: section; content:" " counter(section) }'));
+	//hx.appendChild(sx);
+	hx.append(sx);
 }
 
 /**
