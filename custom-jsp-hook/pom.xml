@@ -11,7 +11,7 @@
 	<artifactId>liferay-repeatable-fields-reorder-hook</artifactId>
 	<packaging>war</packaging>
 	<name>Emil Oberg - Liferay Repeatable Fields Reorder Hook</name>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
@@ -87,4 +87,11 @@
         <liferay.version>6.2.5</liferay.version>
         <liferay.maven.plugin.version>6.2.5</liferay.maven.plugin.version>
     </properties>
+
+
+	<scm>
+		<url>https://github.com/thirdwavellc/Liferay-Repeatable-Fields-Reorder-Hook.git</url>
+		<connection>scm:git:git@github.com:thirdwavellc/Liferay-Repeatable-Fields-Reorder-Hook.git</connection>
+	</scm>
+
 </project>
