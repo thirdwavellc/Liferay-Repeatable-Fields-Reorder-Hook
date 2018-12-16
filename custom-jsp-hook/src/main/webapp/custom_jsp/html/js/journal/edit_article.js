@@ -8,10 +8,10 @@ initSort();
  *
  */
 function initSort() {
-	YUI().use('node', 'transition', function (Y) {
+    YUI().use('node', 'transition', function (Y) {
         var yDdmContainer = Y.one('.lfr-ddm-container');
         if (yDdmContainer) {
-			// Capture clicks on up/down button
+            // Capture clicks on up/down button
             yDdmContainer.delegate('click', moveDown, '.lfr-ddm-reorder-down-button');
             yDdmContainer.delegate('click', moveUp, '.lfr-ddm-reorder-up-button');
 
@@ -21,46 +21,46 @@ function initSort() {
             updateArrowsAndButtons();
         }
 
-	});
-	updateArrowsAndButtons();
-	addNumbertoItems();
+    });
+    updateArrowsAndButtons();
+    addNumbertoItems();
 }
 
 function addNumbertoItems(){
-	
 
-	var hx = $("head"); //document.getElementsByTagName('head').item(0);
-	var sx = document.createElement("style");
-	sx.type = "text/css"; 
-	sx.appendChild(document.createTextNode('.journal-article-container{counter-reset: section;}  .control-group.field-wrapper > span.control-label:after{counter-increment: section; content:" " counter(section) }'));
-	//hx.appendChild(sx);
-	hx.append(sx);
+    YUI().use('node', function (Y) {
+        var hx = Y.one('head');
+        var sx = document.createElement("style");
+        sx.media = "text/css";
+        sx.appendChild(document.createTextNode('.journal-article-container{counter-reset: section;}  .control-group.field-wrapper > span.control-label:after{counter-increment: section; content:" " counter(section) }'));
+        hx.append(sx);
+    });
 }
 
 /**
  * Main function for painting/repainting arrows and delete buttons
- *  
+ *
  * When a) initialized, b) a new repeatable field is added/removed, c) a field is moved up/down
  * first remove all reorder arrows and delete buttons. Then re-paint them again to all the places
  * they should be.
  *
  */
 function updateArrowsAndButtons() {
-	setTimeout(function() { // Timeout needed to allow the other Liferay javascript to finish repainting the DOM.
-		YUI().use('node', function (Y) {
-			var allFieldWrappers = Y.all(fieldWrapperSelector);
-			removeDeleteButtons();
-			removeReorderArrows();
-			allFieldWrappers.each(function (elFieldWrapper) {
-				var siblings = hasSiblings(elFieldWrapper);
-				if (siblings) {
-					addReorderArrows(elFieldWrapper, siblings);
-					addDeleteButtons(elFieldWrapper, siblings);
-				}
-			});
-			setReorderArrowsStyle();
-		});
-	}, 100);
+    setTimeout(function() { // Timeout needed to allow the other Liferay javascript to finish repainting the DOM.
+        YUI().use('node', function (Y) {
+            var allFieldWrappers = Y.all(fieldWrapperSelector);
+            removeDeleteButtons();
+            removeReorderArrows();
+            allFieldWrappers.each(function (elFieldWrapper) {
+                var siblings = hasSiblings(elFieldWrapper);
+                if (siblings) {
+                    addReorderArrows(elFieldWrapper, siblings);
+                    addDeleteButtons(elFieldWrapper, siblings);
+                }
+            });
+            setReorderArrowsStyle();
+        });
+    }, 100);
 }
 
 /**
@@ -68,15 +68,15 @@ function updateArrowsAndButtons() {
  *
  */
 function updateFieldsDisplay() {
-	YUI().use('node', function (Y) {
-		var allFieldWrappers = Y.all(fieldWrapperSelector);
-		var fieldsDisplay = [];
-		allFieldWrappers.each(function (elFieldWrapper) {
-			fieldsDisplay.push(elFieldWrapper.getData('fieldname') + elFieldWrapper.getData('fieldnamespace'));
-		});
-		var input = Y.one(fieldsDisplaySelector);
-		input.set('value', fieldsDisplay.join(','));
-	});
+    YUI().use('node', function (Y) {
+        var allFieldWrappers = Y.all(fieldWrapperSelector);
+        var fieldsDisplay = [];
+        allFieldWrappers.each(function (elFieldWrapper) {
+            fieldsDisplay.push(elFieldWrapper.getData('fieldname') + elFieldWrapper.getData('fieldnamespace'));
+        });
+        var input = Y.one(fieldsDisplaySelector);
+        input.set('value', fieldsDisplay.join(','));
+    });
 }
 
 
@@ -88,25 +88,25 @@ function updateFieldsDisplay() {
  *
  */
 function moveDown() {
-	moveWrapper(this.ancestor(fieldWrapperSelector), 'down');
+    moveWrapper(this.ancestor(fieldWrapperSelector), 'down');
 }
 
 function moveUp() {
-	moveWrapper(this.ancestor(fieldWrapperSelector), 'up');
+    moveWrapper(this.ancestor(fieldWrapperSelector), 'up');
 }
 
 function moveWrapper(clickedWrapper, direction) {
-	var nextWrapper;
-	if (direction === 'up') {
-		nextWrapper = clickedWrapper.previous(fieldWrapperSelector);
-	} else {
-		nextWrapper = clickedWrapper.next(fieldWrapperSelector);
-	}
+    var nextWrapper;
+    if (direction === 'up') {
+        nextWrapper = clickedWrapper.previous(fieldWrapperSelector);
+    } else {
+        nextWrapper = clickedWrapper.next(fieldWrapperSelector);
+    }
 
-	clickedWrapper.swap(nextWrapper);
-	colorMarkMoved(clickedWrapper);
-	updateFieldsDisplay();
-	updateArrowsAndButtons();
+    clickedWrapper.swap(nextWrapper);
+    colorMarkMoved(clickedWrapper);
+    updateFieldsDisplay();
+    updateArrowsAndButtons();
 }
 
 /**
@@ -114,16 +114,16 @@ function moveWrapper(clickedWrapper, direction) {
  *
  */
 function colorMarkMoved(el) {
-	el.transition({
-		duration: 0.3,
-		backgroundColor: "rgba(250, 255, 175, 1)",
-	}, function () {
-		el.transition({
-			delay: 0,
-			duration: 1,
-			backgroundColor: "rgba(250, 255, 175, 0)",
-		});
-	});
+    el.transition({
+        duration: 0.3,
+        backgroundColor: "rgba(250, 255, 175, 1)",
+    }, function () {
+        el.transition({
+            delay: 0,
+            duration: 1,
+            backgroundColor: "rgba(250, 255, 175, 0)",
+        });
+    });
 }
 
 /**
@@ -131,16 +131,16 @@ function colorMarkMoved(el) {
  *
  */
 function hasSiblings (el) {
-	var curSelector = fieldWrapperSelector + '[data-fieldname="' + el.getData('fieldname') + '"]';
-	if (el.next(curSelector) !== null && el.previous(curSelector) !== null) {
-		return 'both';
-	} else if (el.next(curSelector) !== null) {
-		return 'after';
-	} else if (el.previous(curSelector) !== null) {
-		return 'before';
-	} else {
-		return false;
-	}
+    var curSelector = fieldWrapperSelector + '[data-fieldname="' + el.getData('fieldname') + '"]';
+    if (el.next(curSelector) !== null && el.previous(curSelector) !== null) {
+        return 'both';
+    } else if (el.next(curSelector) !== null) {
+        return 'after';
+    } else if (el.previous(curSelector) !== null) {
+        return 'before';
+    } else {
+        return false;
+    }
 }
 
 /**
@@ -152,27 +152,27 @@ function hasSiblings (el) {
  *
  */
 function addReorderArrows(el, siblings) {
-	if (siblings === 'before' || siblings === 'both') {
-		el.append('<a class="lfr-ddm-reorder-up-button lfr-ddm-reorder-button icon-arrow-up" href="javascript:;"></a>');
-	}
+    if (siblings === 'before' || siblings === 'both') {
+        el.append('<a class="lfr-ddm-reorder-up-button lfr-ddm-reorder-button icon-arrow-up" href="javascript:;"></a>');
+    }
 
-	if (siblings === 'after' || siblings === 'both') {
-		el.append('<a class="lfr-ddm-reorder-down-button lfr-ddm-reorder-button icon-arrow-down" href="javascript:;"></a>');
-	}
+    if (siblings === 'after' || siblings === 'both') {
+        el.append('<a class="lfr-ddm-reorder-down-button lfr-ddm-reorder-button icon-arrow-down" href="javascript:;"></a>');
+    }
 }
 
 /**
  * Add Delete buttons depending on if the element has siblings or not.
  *
- * If the field is the first field (and therefor don't have a sibling above) - don't add a delete button. 
- * This mimics the way Liferay do it; In vanilla Liferay, you can't delete the _first_ element in a list 
+ * If the field is the first field (and therefor don't have a sibling above) - don't add a delete button.
+ * This mimics the way Liferay do it; In vanilla Liferay, you can't delete the _first_ element in a list
  * of repeatable fields. Else, add a delete button.
  *
  */
 function addDeleteButtons(el, siblings) {
-	if (siblings === 'before' || siblings === 'both') {
-		el.append('<a class="lfr-ddm-repeatable-delete-button icon-minus-sign" href="javascript:;"></a>');
-	}
+    if (siblings === 'before' || siblings === 'both') {
+        el.append('<a class="lfr-ddm-repeatable-delete-button icon-minus-sign" href="javascript:;"></a>');
+    }
 }
 
 /**
@@ -180,17 +180,17 @@ function addDeleteButtons(el, siblings) {
  *
  */
 function removeDeleteButtons() {
-	YUI().use('node', function (Y) {
-		var allButtons = Y.all('.lfr-ddm-repeatable-delete-button');
-		allButtons.remove();
-	});
+    YUI().use('node', function (Y) {
+        var allButtons = Y.all('.lfr-ddm-repeatable-delete-button');
+        allButtons.remove();
+    });
 }
 
 function removeReorderArrows() {
-	YUI().use('node', function (Y) {
-		var allButtons = Y.all('.lfr-ddm-reorder-button');
-		allButtons.remove();
-	});
+    YUI().use('node', function (Y) {
+        var allButtons = Y.all('.lfr-ddm-reorder-button');
+        allButtons.remove();
+    });
 }
 
 /**
@@ -200,18 +200,18 @@ function removeReorderArrows() {
  *
  */
 function setReorderArrowsStyle() {
-	YUI().use('node', function (Y) {
-		var allButtons = Y.all('.lfr-ddm-reorder-button');
-		allButtons.setStyle('display', 'block');
-		allButtons.setStyle('height', '16px');
-		allButtons.setStyle('position', 'absolute');
-		allButtons.setStyle('top', '4px');
-		allButtons.setStyle('width', '16px');
+    YUI().use('node', function (Y) {
+        var allButtons = Y.all('.lfr-ddm-reorder-button');
+        allButtons.setStyle('display', 'block');
+        allButtons.setStyle('height', '16px');
+        allButtons.setStyle('position', 'absolute');
+        allButtons.setStyle('top', '4px');
+        allButtons.setStyle('width', '16px');
 
-		var upButtons = Y.all('.lfr-ddm-reorder-up-button');
-		upButtons.setStyle('right', '44px');
+        var upButtons = Y.all('.lfr-ddm-reorder-up-button');
+        upButtons.setStyle('right', '44px');
 
-		var downButtons = Y.all('.lfr-ddm-reorder-down-button');
-		downButtons.setStyle('right', '64px');
-	});
+        var downButtons = Y.all('.lfr-ddm-reorder-down-button');
+        downButtons.setStyle('right', '64px');
+    });
 }
