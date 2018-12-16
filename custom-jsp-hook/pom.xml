@@ -11,7 +11,7 @@
 	<artifactId>liferay-repeatable-fields-reorder-hook</artifactId>
 	<packaging>war</packaging>
 	<name>Emil Oberg - Liferay Repeatable Fields Reorder Hook</name>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.1-SNAPSHOT</version>
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
