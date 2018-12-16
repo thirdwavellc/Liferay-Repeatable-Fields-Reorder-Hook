@@ -1,3 +1,4 @@
 /custom-jsp-hook/target/*
 gulpfile.js
 package.json
+rebel.xml
