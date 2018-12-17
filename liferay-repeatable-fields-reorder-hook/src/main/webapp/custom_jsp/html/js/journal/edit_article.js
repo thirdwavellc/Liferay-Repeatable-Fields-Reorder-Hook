@@ -23,18 +23,6 @@ function initSort() {
 
     });
     updateArrowsAndButtons();
-    addNumbertoItems();
-}
-
-function addNumbertoItems(){
-
-    YUI().use('node', function (Y) {
-        var hx = Y.one('head');
-        var sx = document.createElement("style");
-        sx.media = "text/css";
-        sx.appendChild(document.createTextNode('.journal-article-container{counter-reset: section;}  .control-group.field-wrapper > span.control-label:after{counter-increment: section; content:" " counter(section) }'));
-        hx.append(sx);
-    });
 }
 
 /**
